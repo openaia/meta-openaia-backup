@@ -3,19 +3,7 @@
 ![Build](https://github.com/edgeble/meta-openaia/actions/workflows/neu2a-v2-kirkstone.yml/badge.svg)
 [![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg?style=flat)](https://github.com/edgeble/meta-openaia/releases)
 
-Yocto BSP layer for the Edgeble OpenAIA - https://www.openaia.io
-
-This project is based on upstream - https://git.yoctoproject.org/meta-rockchip
-
-Please see the corresponding sections below for details.
-
-## Table of Contents
-
-I. [Build Host](https://github.com/edgeble/meta-openaia#build-host)
-
-II. [Configure Yocto](https://github.com/edgeble/meta-openaia#configure-yoctooe)
-
-III. [Build Yocto](https://github.com/edgeble/meta-openaia#building-meta--bsp-layers)
+Yocto/OE BSP layer for the Edgeble [OpenAIA](https://www.openaia.io) - Based on upstream [meta-rockchip](https://git.yoctoproject.org/meta-rockchip)
 
 ## Build Host
 To install the required packages on a Debian based distribution (Ubuntu etc) run
@@ -29,7 +17,7 @@ libsdl1.2-dev pylint xterm python3-subunit mesa-common-dev zstd liblz4-tool
 
 ## Configure Yocto/OE
 
-In order to build an image with BSP support for a given release, you need to download the corresponding layers described in the "Dependencies" section. Be sure that everything is in the same directory.
+In order to build an image with BSP support for a given release, you need to download the corresponding layers described in the "Dependencies" section.
 
 ```shell
 ~ $ mkdir yocto; cd yocto
@@ -67,8 +55,6 @@ BBLAYERS ?= " \
 
 To enable a particular machine, you need to add a MACHINE line naming the BSP to the local.conf file:
 
-for Neu6b board :-
-
 ```makefile
   MACHINE = "neu6b"
 ```
@@ -85,19 +71,7 @@ Enable disto features needed to support the pacakges by adding the following to 
 DISTRO_FEATURES:append = " bluetooth wifi"
 ```
 
-To enable Wifi using wpa_supplicant
-
-Create the wpa_supplicant configuration file by running the following command on your desktop.
-This will prompt you for the passphrase for your WiFi.
-You may want to then edit the file to remove the clear-text passphrase:
-
-```shell
-wpa_passphrase 'YOUR_SSID' >  ../meta-openaia/recipes-connectivity/wpa-supplicant/files/wpa_supplicant-nl80211-wlan0.conf
-```
-
-All supported machines can be found in meta-openaia/conf/machine.
-
-## Building meta- BSP Layers
+## Building Yocto/OE
 
 You should then be able to build a image as such:
 
@@ -113,8 +87,3 @@ If you want to boot the image on microSD card the follow below steps.
 cd tmp-glibc/deploy/images/\<MACHINE\>
 sudo bmaptool copy --bmap core-image-full-cmdline-neu6b.wic.bmap core-image-full-cmdline-neu6b.wic.xz /dev/sdX
 ```
-
-```
-## Maintainers
-
-* Jagan Teki `<jagan@edgeble.ai>`
